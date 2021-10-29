@@ -1,5 +1,8 @@
-use sycamore::prelude::*;
-use sycamore::context::{ContextProvider, ContextProviderProps, use_context};
+use sycamore::{
+    prelude::*,
+    reactive::create_context_scope,
+    context::{ContextProvider, ContextProviderProps, use_context},
+};
 use web_sys::Event;
 
 #[derive(Clone)]
@@ -12,14 +15,16 @@ struct AppState {
 fn count(c: Signal<i32>) -> Template<G> {
     let state = use_context::<AppState>();
     let handle_click = cloned!((state) => move |_event: Event| {
-        let new_count: Vec<Signal<i32>> = state.counts
-            .get()
-            .as_ref()
-            .clone()
-            .into_iter()
-            .chain(Some(Signal::new(0)))
-            .collect();
-        state.counts.set(new_count)
+        create_context_scope(state.clone(), cloned!((state) => move || {
+            let new_count: Vec<Signal<i32>> = state.counts
+                .get()
+                .as_ref()
+                .clone()
+                .into_iter()
+                .chain(Some(Signal::new(0)))
+                .collect();
+            state.counts.set(new_count)
+        }))
     });
 
     let handle_click_two = cloned!((state) => move |_event: Event| {
