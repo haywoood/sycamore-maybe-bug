@@ -32,10 +32,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
+name = "console_log"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "501a375961cef1a0d44767200e66e4a559283097e91d0730b1d75dfb2f8a1494"
+dependencies = [
+ "log",
+ "web-sys",
+]
+
+[[package]]
 name = "context-bug"
 version = "0.1.0"
 dependencies = [
+ "console_log",
+ "log",
  "sycamore",
+ "wasm-bindgen",
  "web-sys",
 ]
 
@@ -208,7 +221,6 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 [[package]]
 name = "sycamore"
 version = "0.6.3"
-source = "git+https://github.com/sycamore-rs/sycamore?rev=82add180a7a72e4c832bb907215f473163255789#82add180a7a72e4c832bb907215f473163255789"
 dependencies = [
  "ahash",
  "indexmap",
@@ -224,7 +236,6 @@ dependencies = [
 [[package]]
 name = "sycamore-macro"
 version = "0.6.3"
-source = "git+https://github.com/sycamore-rs/sycamore?rev=82add180a7a72e4c832bb907215f473163255789#82add180a7a72e4c832bb907215f473163255789"
 dependencies = [
  "once_cell",
  "proc-macro2",
@@ -235,7 +246,6 @@ dependencies = [
 [[package]]
 name = "sycamore-reactive"
 version = "0.6.3"
-source = "git+https://github.com/sycamore-rs/sycamore?rev=82add180a7a72e4c832bb907215f473163255789#82add180a7a72e4c832bb907215f473163255789"
 dependencies = [
  "ahash",
  "indexmap",
